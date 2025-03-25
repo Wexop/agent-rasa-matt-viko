@@ -1,0 +1,56 @@
+version: "3.1"
+
+nlu:
+  - intent: greet
+    examples: |
+      - bonjour
+      - salut
+      - hello
+      - hey
+
+  - intent: book_hotel
+    examples: |
+      - je veux réserver un hôtel
+      - je cherche un hôtel
+      - peux-tu m'aider à réserver un hôtel ?
+
+  - intent: provide_date
+    examples: |
+      - [15/08/2023](date)
+      - pour le [10 janvier 2024](date)
+      - le [27 juin 2024]
+      - le [1er mai](date)
+      - [12/04/2025](date)
+      - [05/06/2024](date)
+      - le [25 décembre](date)
+
+  - intent: provide_location
+    examples: |
+      - [Nantes](location)
+      - à [Paris](location)
+      - je veux réserver à [Lyon](location)
+      - [Bordeaux](location)
+      - [Nice](location)
+
+  - intent: affirm
+    examples: |
+      - oui
+      - c'est bien ça
+      - exactement
+      - tout à fait
+      - parfait
+
+lookup:
+  location:
+    - Paris
+    - Lyon
+    - Marseille
+    - Toulouse
+    - Bordeaux
+    - Nice
+    - Nantes
+    - Strasbourg
+    - Lille
+    - Rennes
+    - Montpellier
+    - Saint-Malo
