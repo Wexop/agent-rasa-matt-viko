@@ -7,12 +7,14 @@ nlu:
       - salut
       - hello
       - hey
+      - wesh
 
-  - intent: book_hotel
+  - intent: book_restaurant
     examples: |
-      - je veux réserver un hôtel
-      - je cherche un hôtel
-      - peux-tu m'aider à réserver un hôtel ?
+      - je veux réserver
+      - je veux une table
+      - peux-tu m'aider à réserver un une table ?
+      - réserver
 
   - intent: provide_date
     examples: |
@@ -23,34 +25,86 @@ nlu:
       - [12/04/2025](date)
       - [05/06/2024](date)
       - le [25 décembre](date)
+      - ce soir
+      - ce midi
+      - midi
+      - soir
+      - 12h
+      - 19h
+      - dans la soirée
+      - en fin de matinée
 
-  - intent: provide_location
+  - intent: provide_number_person
     examples: |
-      - [Nantes](location)
-      - à [Paris](location)
-      - je veux réserver à [Lyon](location)
-      - [Bordeaux](location)
-      - [Nice](location)
+      - [2](nb_person)
+      - pour [10](nb_person)
+      - ce serai pour [3](nb_person) personnes
+      - [4](nb_person) personnes
+      - on est [8](nb_person)
+      - nous sommes [4](nb_person)
+      - nous serons [2](nb_person)
+      - il faut une table pour [4](nb_person)
+      - on est [6](nb_person)
+      - ce sera pour [10](nb_person) personnes
 
-  - intent: affirm
+  - intent: provide_reservation_name
     examples: |
-      - oui
-      - c'est bien ça
-      - exactement
-      - tout à fait
-      - parfait
+      - [Jean](name)
+      - je m'appelle [Viko](name)
+      - au nom de [legras](name)
+      - pour [Gilet](name)
+
+  - intent: provide_phone
+    examples: |
+      - [0782382824](phone)
+      - mon numéro est le [0612345678](phone)
+      - le [0698765432](phone)
+      - mon numéro est [0612345678](phone)
+      - tu peux me joindre au [0698765432](phone)
+      - c'est le [0782392923](phone)
+      - mon téléphone c'est [0655667788](phone)
+
+  - intent: provide_comment
+    examples: |
+      - [j'aime pas les tomates](comment)
+      - je suis [allergique aux pommes](comment)
+      - je [serais en retard](comment)
 
 lookup:
-  location:
-    - Paris
-    - Lyon
-    - Marseille
-    - Toulouse
-    - Bordeaux
-    - Nice
-    - Nantes
-    - Strasbourg
-    - Lille
-    - Rennes
-    - Montpellier
-    - Saint-Malo
+  name:
+    - Jean
+    - Patrick
+    - Victor
+    - Viko
+    - Legras
+    - Terrien
+    - Heurtin
+    - Chanson
+    - Tom le magnifique
+    - Baptou le con
+    - Corneil
+    - Jean-eude
+  nb_person:
+  - pour 2
+  - nous sommes 4
+  - on est 6
+  phone:
+    - 0612345678
+    - 0622334455
+    - 0633445566
+    - 0644556677
+    - 0655667788
+    - 0785627388
+    - 0782392923
+  comment:
+    - allergique aux pommes
+    - je suis allergique
+    - je n’aime pas les tomates
+    - en retard
+    - besoin d’une chaise haute
+    - végétarien
+    - table près de la fenêtre
+    - fête d’anniversaire
+    - pas trop bruyant
+    - pas de sauce piquante
+

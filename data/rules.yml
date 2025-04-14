@@ -8,20 +8,7 @@ rules:
 
   - rule: Commencer la réservation
     steps:
-      - intent: book_hotel
+      - intent: book_restaurant
       - action: utter_ask_date
 
-  - rule: Demander la ville
-    steps:
-      - intent: provide_date
-      - action: utter_ask_location
 
-  - rule: Confirmer la réservation
-    steps:
-      - intent: provide_location
-      - action: utter_confirm
-
-  - rule: Finaliser la réservation
-    steps:
-      - intent: affirm
-      - action: utter_goodbye

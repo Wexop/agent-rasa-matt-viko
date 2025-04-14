@@ -2,16 +2,19 @@ version: "3.1"
 
 intents:
   - greet
-  - book_hotel
+  - book_restaurant
   - provide_date
-  - provide_location
-  - affirm
-  - change_date
-  - change_location
+  - provide_number_person
+  - provide_reservation_name
+  - provide_phone
+  - provide_comment
 
 entities:
   - date
-  - location
+  - name
+  - nb_person
+  - phone
+  - comment
 
 slots:
   date:
@@ -19,20 +22,50 @@ slots:
     mappings:
       - type: from_entity
         entity: date
-  location:
+  nb_person:
     type: text
     mappings:
       - type: from_entity
-        entity: location
+        entity: nb_person
+        intent: provide_number_person
+  name:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: name
+  table_dispo:
+    type: bool
+    influence_conversation: false
+    mappings: []
+  phone:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: phone
+        intent: provide_phone
+  comment:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: comment
+
 
 responses:
   utter_greet:
-    - text: "Bonjour, que puis-je pour vous ?"
+    - text: "Bonjour, que puis-je pour vous ? Réserver / Annuler une réservation / Information sur une réservation / Menu du jour / Liste des allergenes / Lien vers le menu"
   utter_ask_date:
     - text: "Bien sûr ! Pour quelle date ?"
-  utter_ask_location:
-    - text: "Dans quelle ville ?"
-  utter_confirm:
-    - text: "Je résume, vous cherchez un hôtel à {location} le {date}, c'est bien ça ?"
+  utter_ask_person_nb:
+    - text: "Combien de personnes ?"
+  utter_ask_name:
+    - text: "Nom de la réservation ?"
+  utter_ask_phone:
+    - text: "Numéro de téléphone ?"
+  utter_ask_comment:
+    - text: "Votre commentaire ?"
   utter_goodbye:
-    - text: "D'accord, je vais procéder à la réservation !"
+    - text: "Aurevoir"
+
+actions:
+  - action_check_table_availability
+  - action_reservation_table
