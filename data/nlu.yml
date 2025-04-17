@@ -63,12 +63,34 @@ nlu:
       - tu peux me joindre au [0698765432](phone)
       - c'est le [0782392923](phone)
       - mon téléphone c'est [0655667788](phone)
+  - regex: phone
+    examples: |
+      - \b0[1-9](\d{2}){4}\b
 
   - intent: provide_comment
     examples: |
       - [j'aime pas les tomates](comment)
+      - [Pas de commentaire](comment)
       - je suis [allergique aux pommes](comment)
       - je [serais en retard](comment)
+
+  - intent: provide_today_launchtime
+    examples: |
+      - Ce midi
+      - midi
+      - à midi
+      - 12h
+      - vers midi
+      - nous viendrons dejeuner
+
+  - intent: provide_today_evening
+    examples: |
+      - Ce soir
+      - en soirée
+      - En fin de journée
+      - 20h
+      - dans la soirée
+      - nous viendrons diner
 
 lookup:
   name:
@@ -107,4 +129,7 @@ lookup:
     - fête d’anniversaire
     - pas trop bruyant
     - pas de sauce piquante
+    - pas de commentaire
+    - je n'ai pas de commentaire*
+    - aucun
 

@@ -3,6 +3,7 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
+import datetime
 
 
 class ActionCheckTableAvailability(Action):
@@ -17,9 +18,9 @@ class ActionCheckTableAvailability(Action):
         # Récupérer la date
         date = tracker.get_slot("date")
 
+        #Pas de date, on met aujourd'hui (ce midi / ce soir)
         if not date:
-            dispatcher.utter_message(text="Je n'ai pas compris la date.")
-            return [SlotSet("table_dispo", False)]
+            date = datetime.datetime.now().strftime("%x")
 
         # Connexion à la base de données SQLite
         try:

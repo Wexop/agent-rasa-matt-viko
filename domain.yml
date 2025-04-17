@@ -8,6 +8,8 @@ intents:
   - provide_reservation_name
   - provide_phone
   - provide_comment
+  - provide_today_launchtime
+  - provide_today_evening
 
 entities:
   - date
