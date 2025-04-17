@@ -13,6 +13,7 @@ intents:
   - provide_affrim
   - provide_decline
   - ask_menu_link
+  - ask_menu_today
 
 entities:
   - date
@@ -78,3 +79,4 @@ responses:
 actions:
   - action_check_table_availability
   - action_reservation_table
+  - action_today_menu

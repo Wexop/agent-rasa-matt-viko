@@ -119,6 +119,15 @@ nlu:
       - donne le lien
       - file le lien du menu
 
+  - intent: ask_menu_today
+    examples: |
+      - Le menu du jour
+      - menu du jour
+      - je veux le menu du jour
+      - le menu
+      - donne le menu du jour
+      - file menu d'aujourd'hui
+
 lookup:
   name:
     - Jean

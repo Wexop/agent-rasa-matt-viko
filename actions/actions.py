@@ -90,4 +90,43 @@ class ActionReserveTable(Action):
         except sqlite3.Error as e:
             dispatcher.utter_message(text="Il y a eu un problème avec la base de données pour action action_reservation_table. Essayez plus tard.")
             return []
-            
+
+class ActionTodayMenu(Action):
+
+    def name(self) -> Text:
+        return "action_today_menu"
+    
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        try:
+            with sqlite3.connect("database.db") as conn:
+                cursor = conn.cursor()
+
+                # Exécution de l'insert
+                cursor.execute("""
+                    SELECT 
+  (SELECT name FROM Plat WHERE type = 'Entrée' ORDER BY RANDOM() LIMIT 1) AS entree,
+  (SELECT name FROM Plat WHERE type = 'Plat' ORDER BY RANDOM() LIMIT 1) AS plat,
+  (SELECT name FROM Plat WHERE type = 'Dessert' ORDER BY RANDOM() LIMIT 1) AS dessert;
+                """)
+
+
+                result = cursor.fetchone()
+                entree = result[0]
+                plat = result[1]
+                dessert = result[2]
+
+                dispatcher.utter_message(text=f"""Voici le menu du jour: 
+                Entrée {entree}
+                Plat {plat}
+                Dessert {dessert}
+""")
+                return []
+
+
+
+        except sqlite3.Error as e:
+            dispatcher.utter_message(text="Il y a eu un problème avec la base de données pour action action_reservation_table. Essayez plus tard.")
+            return []          

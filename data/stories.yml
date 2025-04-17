@@ -161,3 +161,11 @@ stories:
       - intent: ask_menu_link
       - action: utter_menu_link
       - action: utter_goodbye
+
+  - story: envoyer le menu du jour
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_menu_today
+      - action: action_today_menu
+      - action: utter_goodbye
