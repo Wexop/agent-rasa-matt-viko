@@ -109,7 +109,16 @@ nlu:
       - ça v apas être possible
       - pas envie
       - nan
-      
+
+  - intent: ask_menu_link
+    examples: |
+      - j'aimerai avoir le lien du menu
+      - lien du menu
+      - je veux le lien
+      - le lien du menu
+      - donne le lien
+      - file le lien du menu
+
 lookup:
   name:
     - Jean

@@ -12,6 +12,7 @@ intents:
   - provide_today_evening
   - provide_affrim
   - provide_decline
+  - ask_menu_link
 
 entities:
   - date
@@ -71,6 +72,8 @@ responses:
     - text: "Réserver pour une autre date ?"
   utter_goodbye:
     - text: "Aurevoir"
+  utter_menu_link:
+    - text: "Voici le lien : https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzz6BZWvx_0ZXN1hqZEQIAiajcYxduYQmSmQ&s"
 
 actions:
   - action_check_table_availability

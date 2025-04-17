@@ -153,3 +153,11 @@ stories:
       - action: utter_date_impossible
       - intent: provide_decline
       - action: utter_goodbye
+
+  - story: envoyer le lien du menu
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_menu_link
+      - action: utter_menu_link
+      - action: utter_goodbye
