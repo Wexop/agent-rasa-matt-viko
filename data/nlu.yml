@@ -92,6 +92,24 @@ nlu:
       - dans la soirée
       - nous viendrons diner
 
+  - intent: provide_affrim
+    examples: |
+      - oui
+      - ok
+      - Oui je veux bien
+      - Bien sûr
+      - ouais
+      - faisons ça
+
+  - intent: provide_decline
+    examples: |
+      - non
+      - nop
+      - non merci
+      - ça v apas être possible
+      - pas envie
+      - nan
+      
 lookup:
   name:
     - Jean

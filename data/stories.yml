@@ -90,3 +90,66 @@ stories:
       - action: action_reservation_table
       - action: utter_goodbye
 
+  - story: réservation d'une table à une date indisponible, refais la reservation
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: book_restaurant
+      - action: utter_ask_date
+      - intent: provide_date
+        entities:
+          - date: "{date}"
+      - action: utter_ask_person_nb
+      - intent: provide_number_person
+        entities:
+          - nb_person: "{nb_person}"
+      - action: action_check_table_availability
+      - slot_was_set:
+          - table_dispo: false
+      - action: utter_date_impossible
+      - intent: provide_affrim
+      - action: utter_ask_date
+      - intent: provide_date
+        entities:
+          - date: "{date}"
+      - action: utter_ask_person_nb
+      - intent: provide_number_person
+        entities:
+          - nb_person: "{nb_person}"
+      - action: action_check_table_availability
+      - slot_was_set:
+          - table_dispo: true
+      - action: utter_ask_name
+      - intent: provide_reservation_name
+        entities:
+          - name: "{name}"
+      - action: utter_ask_phone
+      - intent: provide_phone
+        entities:
+          - phone: "{phone}"
+      - action: utter_ask_comment
+      - intent: provide_comment
+        entities:
+          - comment: "{comment}"
+      - action: action_reservation_table
+      - action: utter_goodbye
+
+  - story: réservation d'une table à une date indisponible, refais pas la reservation
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: book_restaurant
+      - action: utter_ask_date
+      - intent: provide_date
+        entities:
+          - date: "{date}"
+      - action: utter_ask_person_nb
+      - intent: provide_number_person
+        entities:
+          - nb_person: "{nb_person}"
+      - action: action_check_table_availability
+      - slot_was_set:
+          - table_dispo: false
+      - action: utter_date_impossible
+      - intent: provide_decline
+      - action: utter_goodbye

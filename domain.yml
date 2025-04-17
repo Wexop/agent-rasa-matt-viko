@@ -10,6 +10,8 @@ intents:
   - provide_comment
   - provide_today_launchtime
   - provide_today_evening
+  - provide_affrim
+  - provide_decline
 
 entities:
   - date
@@ -65,6 +67,8 @@ responses:
     - text: "Numéro de téléphone ?"
   utter_ask_comment:
     - text: "Votre commentaire ?"
+  utter_date_impossible:
+    - text: "Réserver pour une autre date ?"
   utter_goodbye:
     - text: "Aurevoir"
 
