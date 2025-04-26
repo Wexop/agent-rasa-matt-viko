@@ -10,5 +10,3 @@ rules:
     steps:
       - intent: book_restaurant
       - action: utter_ask_date
-
-

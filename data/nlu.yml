@@ -20,7 +20,7 @@ nlu:
     examples: |
       - [15/08/2023](date)
       - pour le [10 janvier 2024](date)
-      - le [27 juin 2024]
+      - le [27 juin 2024](date)
       - le [1er mai](date)
       - [12/04/2025](date)
       - [05/06/2024](date)
@@ -92,7 +92,7 @@ nlu:
       - dans la soirée
       - nous viendrons diner
 
-  - intent: provide_affrim
+  - intent: provide_affirm
     examples: |
       - oui
       - ok
@@ -106,7 +106,7 @@ nlu:
       - non
       - nop
       - non merci
-      - ça v apas être possible
+      - ça va pas être possible
       - pas envie
       - nan
 
@@ -127,6 +127,15 @@ nlu:
       - le menu
       - donne le menu du jour
       - file menu d'aujourd'hui
+
+  - intent: ask_allergenes
+    examples: |
+      - allergenes
+      - liste des allergenes
+      - je veux la liste des allergenes
+      - les allergenes
+      - donne moi la liste des allergenes
+      - file la liste des allergenes
 
 lookup:
   name:
@@ -166,6 +175,6 @@ lookup:
     - pas trop bruyant
     - pas de sauce piquante
     - pas de commentaire
-    - je n'ai pas de commentaire*
+    - je n'ai pas de commentaire
     - aucun
 

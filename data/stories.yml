@@ -107,7 +107,7 @@ stories:
       - slot_was_set:
           - table_dispo: false
       - action: utter_date_impossible
-      - intent: provide_affrim
+      - intent: provide_affirm
       - action: utter_ask_date
       - intent: provide_date
         entities:
@@ -168,4 +168,12 @@ stories:
       - action: utter_greet
       - intent: ask_menu_today
       - action: action_today_menu
+      - action: utter_goodbye
+
+  - story: envoyer la liste des allergenes
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_allergenes
+      - action: action_list_allergenes
       - action: utter_goodbye

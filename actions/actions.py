@@ -129,4 +129,41 @@ class ActionTodayMenu(Action):
 
         except sqlite3.Error as e:
             dispatcher.utter_message(text="Il y a eu un problème avec la base de données pour action action_reservation_table. Essayez plus tard.")
-            return []          
+            return []    
+
+
+class ActionGetAllAllergenesByPlat(Action):
+    def name(self) -> Text:
+        return "action_list_allergenes"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        try:
+            with sqlite3.connect("database.db") as conn:
+                cursor = conn.cursor()
+
+                cursor.execute("""
+                    SELECT P.name, GROUP_CONCAT(A.name, ', ') AS allergenes
+                    FROM Plat P
+                    JOIN PlatAllergene PA ON P.id = PA.plat_id
+                    JOIN Allergene A ON A.id = PA.allergene_id
+                    GROUP BY P.id
+                    ORDER BY P.name
+                """)
+
+                results = cursor.fetchall()
+
+                if results:
+                    message = "Voici les plats contenant des allergènes :\n"
+                    for plat_name, allergenes in results:
+                        message += f"- {plat_name} : {allergenes}\n"
+                    
+                    dispatcher.utter_message(text=message)
+                else:
+                    dispatcher.utter_message(text="Aucun plat avec des allergènes trouvé.")
+        except sqlite3.Error as e:
+            dispatcher.utter_message(text=f"Erreur lors de la récupération des allergènes : {str(e)}")
+
+        return []

@@ -10,10 +10,11 @@ intents:
   - provide_comment
   - provide_today_launchtime
   - provide_today_evening
-  - provide_affrim
+  - provide_affirm
   - provide_decline
   - ask_menu_link
   - ask_menu_today
+  - ask_allergenes
 
 entities:
   - date
@@ -80,3 +81,4 @@ actions:
   - action_check_table_availability
   - action_reservation_table
   - action_today_menu
+  - action_list_allergenes
