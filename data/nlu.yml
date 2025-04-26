@@ -80,7 +80,10 @@ nlu:
       - c'est le numero [2](reservation_number)
       - la resa [34](reservation_number)
       - pour la réservation [567](reservation_number)
-      - la réservation [8901](reservation_number)
+      - la réservation [4](reservation_number)
+      - j'ai le numéro [5](reservation_number)
+      - le numéro [7](reservation_number)
+      - mon numéro de réservation est [3](reservation_number)
 
   - intent: provide_today_launchtime
     examples: |
@@ -155,6 +158,15 @@ nlu:
       - je veux des infos sur ma réservation
       - je veux des infos sur une réservation
 
+  - intent: ask_delete_reservation
+    examples: |
+      - supprimer une réservation
+      - je veux supprimer sur une réservation
+      - delete reservation
+      - annuler une réservation
+      - annuler réservation
+      - je veux anuler ma réservation
+
 lookup:
   name:
     - Jean
@@ -201,3 +213,6 @@ lookup:
     - c'est le 3
     - oui j'ai le 4
     - c'est la réservation 5
+    - réservation 10
+    - la réservation numéro 6
+    - c'est le 6

@@ -17,6 +17,7 @@ intents:
   - ask_menu_today
   - ask_allergenes
   - ask_info_reservation
+  - ask_delete_reservation
 
 entities:
   - date
@@ -93,3 +94,4 @@ actions:
   - action_today_menu
   - action_list_allergenes
   - action_get_reservation
+  - action_delete_reservation

@@ -208,3 +208,42 @@ class ActionGetReservation(Action):
         except sqlite3.Error as e:
             dispatcher.utter_message(text="Il y a eu un problème avec la base de données pour action action_reservation_table. Essayez plus tard.")
             return []
+
+
+class ActionDeleteReservation(Action):
+    def name(self) -> Text:
+        return "action_delete_reservation"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # Récupérer le numero de reservation (id)
+        reservation_number = tracker.get_slot("reservation_number")
+
+        try:
+            with sqlite3.connect("database.db") as conn:
+                cursor = conn.cursor()
+
+                # Exécution de l'insert
+                cursor.execute("""
+                    SELECT * FROM Reservation WHERE id = ?
+                """, (str(reservation_number)))
+
+                result = cursor.fetchone()
+
+                if result:
+                    cursor.execute("""
+                        DELETE FROM Reservation WHERE id = ?
+                    """, (str(reservation_number),))
+
+                    conn.commit()
+                    dispatcher.utter_message(text="Réservation supprimée !")
+                else:
+                    dispatcher.utter_message(text="Impossible d'annuler, aucune réservation trouvée.")
+
+                return []
+
+        except sqlite3.Error as e:
+            dispatcher.utter_message(text="Il y a eu un problème avec la base de données pour action action_reservation_table. Essayez plus tard.")
+            return []

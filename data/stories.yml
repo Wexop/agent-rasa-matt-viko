@@ -189,3 +189,15 @@ stories:
           - reservation_number: "{reservation_number}"
       - action: action_get_reservation
       - action: utter_goodbye
+
+  - story: annuler les informations de réservation
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_delete_reservation
+      - action: utter_ask_reservation_number
+      - intent: provide_reservation_number
+        entities:
+          - reservation_number: "{reservation_number}"
+      - action: action_delete_reservation
+      - action: utter_goodbye
