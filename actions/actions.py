@@ -131,7 +131,6 @@ class ActionTodayMenu(Action):
             dispatcher.utter_message(text="Il y a eu un problème avec la base de données pour action action_reservation_table. Essayez plus tard.")
             return []    
 
-
 class ActionGetAllAllergenesByPlat(Action):
     def name(self) -> Text:
         return "action_list_allergenes"
@@ -167,3 +166,45 @@ class ActionGetAllAllergenesByPlat(Action):
             dispatcher.utter_message(text=f"Erreur lors de la récupération des allergènes : {str(e)}")
 
         return []
+
+class ActionGetReservation(Action):
+    def name(self) -> Text:
+        return "action_get_reservation"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # Récupérer le numero de reservation (id)
+        reservation_number = tracker.get_slot("reservation_number")
+
+        try:
+            with sqlite3.connect("database.db") as conn:
+                cursor = conn.cursor()
+
+                # Exécution de l'insert
+                cursor.execute("""
+                    SELECT * FROM Reservation WHERE id = ?
+                """, (reservation_number,))
+
+                result = cursor.fetchone()
+
+                if result:
+                    name, comment, person_nb, date, phone = result
+                    message = (
+                        f"Voici les détails de votre réservation :\n"
+                        f"- Nom : {name}\n"
+                        f"- Commentaire : {comment}\n"
+                        f"- Nombre de personnes : {person_nb}\n"
+                        f"- Date : {date}\n"
+                        f"- Téléphone : {phone}"
+                    )
+                    dispatcher.utter_message(text=message)
+                else:
+                    dispatcher.utter_message(text="Aucune réservation trouvée.")
+
+                return []
+
+        except sqlite3.Error as e:
+            dispatcher.utter_message(text="Il y a eu un problème avec la base de données pour action action_reservation_table. Essayez plus tard.")
+            return []

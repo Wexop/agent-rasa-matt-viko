@@ -10,3 +10,13 @@ rules:
     steps:
       - intent: book_restaurant
       - action: utter_ask_date
+  
+  - rule: Demander numéro réservation après demande info réservation
+    steps:
+      - intent: ask_info_reservation
+      - action: utter_ask_reservation_number
+  
+  - rule: Chercher une réservation après avoir donné numéro
+    steps:
+      - intent: provide_reservation_number
+      - action: action_get_reservation

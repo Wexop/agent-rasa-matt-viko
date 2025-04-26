@@ -12,9 +12,11 @@ intents:
   - provide_today_evening
   - provide_affirm
   - provide_decline
+  - provide_reservation_number
   - ask_menu_link
   - ask_menu_today
   - ask_allergenes
+  - ask_info_reservation
 
 entities:
   - date
@@ -22,6 +24,7 @@ entities:
   - nb_person
   - phone
   - comment
+  - reservation_number
 
 slots:
   date:
@@ -55,6 +58,11 @@ slots:
     mappings:
       - type: from_entity
         entity: comment
+  reservation_number:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: reservation_number
 
 
 responses:
@@ -76,9 +84,12 @@ responses:
     - text: "Aurevoir"
   utter_menu_link:
     - text: "Voici le lien : https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzz6BZWvx_0ZXN1hqZEQIAiajcYxduYQmSmQ&s"
+  utter_ask_reservation_number:
+    - text: "Quel est le numéro de réservation ?"
 
 actions:
   - action_check_table_availability
   - action_reservation_table
   - action_today_menu
   - action_list_allergenes
+  - action_get_reservation
