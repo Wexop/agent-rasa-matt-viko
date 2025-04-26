@@ -188,4 +188,4 @@ stories:
         entities:
           - reservation_number: "{reservation_number}"
       - action: action_get_reservation
-      - action: action_listen
+      - action: utter_goodbye

@@ -185,12 +185,12 @@ class ActionGetReservation(Action):
                 # Exécution de l'insert
                 cursor.execute("""
                     SELECT * FROM Reservation WHERE id = ?
-                """, (reservation_number,))
+                """, (str(reservation_number)))
 
                 result = cursor.fetchone()
 
                 if result:
-                    name, comment, person_nb, date, phone = result
+                    id, name, comment, person_nb, date, phone = result
                     message = (
                         f"Voici les détails de votre réservation :\n"
                         f"- Nom : {name}\n"

@@ -196,16 +196,8 @@ lookup:
     - je n'ai pas de commentaire
     - aucun
   reservation_number:
-    - 1
-    - 2
-    - 3
-    - 4
-    - 5
-    - 6
-    - 7
-    - 8
-    - 9
-    - 10
-    - 234
-    - 5678
-    - 99999
+    - mon numéro est le 1
+    - ma réservation est la 2
+    - c'est le 3
+    - oui j'ai le 4
+    - c'est la réservation 5
