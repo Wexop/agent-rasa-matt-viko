@@ -11,9 +11,8 @@ rules:
       - intent: book_restaurant
       - action: utter_ask_date
   
-  - rule: Demander numéro réservation après demande info réservation
+  - rule: traiter la réservation
     steps:
-      - intent: ask_info_reservation
-      - action: utter_ask_reservation_number
-  
-
+      - intent: provide_reservation_number
+      - action: action_handle_reservation
+      - action: utter_goodbye

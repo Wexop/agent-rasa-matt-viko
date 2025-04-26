@@ -183,21 +183,27 @@ stories:
       - intent: greet
       - action: utter_greet
       - intent: ask_info_reservation
+      - action: action_set_action_type_info
+      - slot_was_set:
+          - action_type: "info"
       - action: utter_ask_reservation_number
       - intent: provide_reservation_number
         entities:
           - reservation_number: "{reservation_number}"
-      - action: action_get_reservation
+      - action: action_handle_reservation
       - action: utter_goodbye
 
-  - story: annuler les informations de réservation
+  - story: annuler une réservation
     steps:
       - intent: greet
       - action: utter_greet
       - intent: ask_delete_reservation
+      - action: action_set_action_type_delete
+      - slot_was_set:
+          - action_type: "delete"
       - action: utter_ask_reservation_number
       - intent: provide_reservation_number
         entities:
           - reservation_number: "{reservation_number}"
-      - action: action_delete_reservation
+      - action: action_handle_reservation
       - action: utter_goodbye

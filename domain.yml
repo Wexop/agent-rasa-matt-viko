@@ -64,6 +64,10 @@ slots:
     mappings:
       - type: from_entity
         entity: reservation_number
+  action_type:
+    type: text
+    influence_conversation: true
+    mappings: []
 
 
 responses:
@@ -93,5 +97,6 @@ actions:
   - action_reservation_table
   - action_today_menu
   - action_list_allergenes
-  - action_get_reservation
-  - action_delete_reservation
+  - action_handle_reservation
+  - action_set_action_type_info
+  - action_set_action_type_delete

@@ -128,7 +128,7 @@ class ActionTodayMenu(Action):
 
 
         except sqlite3.Error as e:
-            dispatcher.utter_message(text="Il y a eu un problème avec la base de données pour action action_reservation_table. Essayez plus tard.")
+            dispatcher.utter_message(text="Il y a eu un problème avec la base de données pour action action_today_menu. Essayez plus tard.")
             return []    
 
 class ActionGetAllAllergenesByPlat(Action):
@@ -167,9 +167,9 @@ class ActionGetAllAllergenesByPlat(Action):
 
         return []
 
-class ActionGetReservation(Action):
+class ActionHandleReservation(Action):
     def name(self) -> Text:
-        return "action_get_reservation"
+        return "action_handle_reservation"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -177,73 +177,81 @@ class ActionGetReservation(Action):
 
         # Récupérer le numero de reservation (id)
         reservation_number = tracker.get_slot("reservation_number")
+        action_type = tracker.get_slot("action_type")
 
-        try:
-            with sqlite3.connect("database.db") as conn:
-                cursor = conn.cursor()
+        if(action_type == "delete"):
 
-                # Exécution de l'insert
-                cursor.execute("""
-                    SELECT * FROM Reservation WHERE id = ?
-                """, (str(reservation_number)))
+            try:
+                with sqlite3.connect("database.db") as conn:
+                    cursor = conn.cursor()
 
-                result = cursor.fetchone()
-
-                if result:
-                    id, name, comment, person_nb, date, phone = result
-                    message = (
-                        f"Voici les détails de votre réservation :\n"
-                        f"- Nom : {name}\n"
-                        f"- Commentaire : {comment}\n"
-                        f"- Nombre de personnes : {person_nb}\n"
-                        f"- Date : {date}\n"
-                        f"- Téléphone : {phone}"
-                    )
-                    dispatcher.utter_message(text=message)
-                else:
-                    dispatcher.utter_message(text="Aucune réservation trouvée.")
-
-                return []
-
-        except sqlite3.Error as e:
-            dispatcher.utter_message(text="Il y a eu un problème avec la base de données pour action action_reservation_table. Essayez plus tard.")
-            return []
-
-
-class ActionDeleteReservation(Action):
-    def name(self) -> Text:
-        return "action_delete_reservation"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        # Récupérer le numero de reservation (id)
-        reservation_number = tracker.get_slot("reservation_number")
-
-        try:
-            with sqlite3.connect("database.db") as conn:
-                cursor = conn.cursor()
-
-                # Exécution de l'insert
-                cursor.execute("""
-                    SELECT * FROM Reservation WHERE id = ?
-                """, (str(reservation_number)))
-
-                result = cursor.fetchone()
-
-                if result:
+                    # Exécution de l'insert
                     cursor.execute("""
-                        DELETE FROM Reservation WHERE id = ?
-                    """, (str(reservation_number),))
+                        SELECT * FROM Reservation WHERE id = ?
+                    """, (str(reservation_number)))
 
-                    conn.commit()
-                    dispatcher.utter_message(text="Réservation supprimée !")
-                else:
-                    dispatcher.utter_message(text="Impossible d'annuler, aucune réservation trouvée.")
+                    result = cursor.fetchone()
 
+                    if result:
+                        cursor.execute("""
+                            DELETE FROM Reservation WHERE id = ?
+                        """, (str(reservation_number),))
+
+                        conn.commit()
+                        dispatcher.utter_message(text="Réservation supprimée !")
+                    else:
+                        dispatcher.utter_message(text="Impossible d'annuler, aucune réservation trouvée.")
+
+                    return []
+
+            except sqlite3.Error as e:
+                dispatcher.utter_message(text=f"Il y a eu un problème avec la base de données pour action action_handle_reservation. Essayez plus tard. {e}")
                 return []
 
-        except sqlite3.Error as e:
-            dispatcher.utter_message(text="Il y a eu un problème avec la base de données pour action action_reservation_table. Essayez plus tard.")
-            return []
+        else:
+
+            try:
+                with sqlite3.connect("database.db") as conn:
+                    cursor = conn.cursor()
+
+                    # Exécution de l'insert
+                    cursor.execute("""
+                        SELECT * FROM Reservation WHERE id = ?
+                    """, (str(reservation_number)))
+
+                    result = cursor.fetchone()
+
+                    if result:
+                        id, name, comment, person_nb, date, phone = result
+                        message = (
+                            f"Voici les détails de votre réservation :\n"
+                            f"- Nom : {name}\n"
+                            f"- Commentaire : {comment}\n"
+                            f"- Nombre de personnes : {person_nb}\n"
+                            f"- Date : {date}\n"
+                            f"- Téléphone : {phone}"
+                        )
+                        dispatcher.utter_message(text=message)
+                    else:
+                        dispatcher.utter_message(text="Aucune réservation trouvée.")
+
+                    return []
+
+            except sqlite3.Error as e:
+                dispatcher.utter_message(text="Il y a eu un problème avec la base de données pour action action_reservation_table. Essayez plus tard.")
+                return []
+    
+
+class ActionSetActionTypeInfo(Action):
+    def name(self):
+        return "action_set_action_type_info"
+
+    def run(self, dispatcher, tracker, domain):
+        return [SlotSet("action_type", "info")]
+
+class ActionSetActionTypeDelete(Action):
+    def name(self):
+        return "action_set_action_type_delete"
+
+    def run(self, dispatcher, tracker, domain):
+        return [SlotSet("action_type", "delete")]
